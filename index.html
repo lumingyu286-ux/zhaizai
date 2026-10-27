@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>宅家导航 - 影视动漫游戏与阅读网址分类</title>
+<meta name="description" content="按分类整理的休闲网址：影视剧集、动漫漫画、音乐播客、游戏、小说阅读、社区论坛、体育赛事、财经行情与求职，支持站内查找和本地收藏。含成人内容分区，仅限 18 周岁及以上访问。">
+
+<!-- ↓ 镜像站取消这一行注释，主力站保持注释。详见 README.md
+     只开 noindex,follow。别再加指向别处的 canonical：
+     两个信号矛盾，canonical 会把 noindex 一并传过去。 -->
+<!-- <meta name="robots" content="noindex,follow"> -->
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="宅家导航 - 影视动漫游戏与阅读网址分类">
+<meta property="og:description" content="影视、动漫、音乐、游戏、小说与社区的分类网址，支持站内查找和本地收藏。">
+<meta name="referrer" content="no-referrer-when-downgrade">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- 脚本没起来时的兜底。app.js 一启动就会把它藏掉。
+     noscript 只管「禁用了 JS」，管不了「JS 开着但 app.js 被拦截」。 -->
+<div class="boot">
+  <h2>页面没能加载完整</h2>
+  <p>刷新一下通常就好。如果反复这样，可能是拦截插件挡掉了本页的脚本。</p>
+</div>
+
+<noscript>
+  <div class="boot">
+    <h2>需要开启 JavaScript</h2>
+    <p>本页的分类和查找功能依赖脚本。</p>
+  </div>
+</noscript>
+
+<div id="shell" class="shell" hidden>
+
+  <header class="top">
+    <div class="top-row">
+      <!-- 用 h1 而不是 strong：整页的标题层级要从 1 开始，
+           否则文档大纲直接从 h2 起步，读屏器的标题导航会断档。 -->
+      <div class="brand">
+        <h1 class="brand-name" id="brand-name">宅家导航</h1>
+        <span id="brand-tag"></span>
+      </div>
+
+      <form id="find-form" class="find" role="search">
+        <label class="sr-only" for="engine">查找方式</label>
+        <select id="engine">
+          <option value="local">站内查找</option>
+          <option value="baidu">百度</option>
+          <option value="bing">Bing</option>
+          <option value="google">Google</option>
+        </select>
+        <label class="sr-only" for="find">关键词</label>
+        <input id="find" type="search" placeholder="按 / 开始查找" autocomplete="off" spellcheck="false">
+        <button type="submit">查找</button>
+      </form>
+
+      <!-- aria-label 里必须包含可见文字「切换主题」，
+           否则语音控制说「点击切换主题」匹配不上（WCAG 2.5.3）。
+           app.js 会把它更新成「切换主题，当前浅色 / 当前深色」。 -->
+      <button type="button" id="theme" class="theme" aria-label="切换主题">切换主题</button>
+    </div>
+
+    <nav id="chips" class="chips" aria-label="分类"></nav>
+  </header>
+
+  <main class="main">
+    <section id="fav-block" class="block" hidden aria-labelledby="fav-title">
+      <div class="block-head">
+        <h2 id="fav-title">常用</h2>
+        <span class="tally" id="fav-tally"></span>
+      </div>
+      <div id="fav-grid" class="grid"></div>
+    </section>
+
+    <div id="groups"></div>
+
+    <p id="empty" class="empty" hidden></p>
+
+    <footer class="foot">
+      <p class="foot-age"><span class="mark">18+</span> 成人内容分区仅限年满 18 周岁者访问</p>
+      <p class="foot-note" id="foot-note"></p>
+    </footer>
+  </main>
+</div>
+
+<!-- 成人条目的点击确认。只拦那一条，其余链接照常直达。 -->
+<div id="ask" class="ask" role="dialog" aria-modal="true" aria-labelledby="ask-title" hidden>
+  <div class="ask-panel">
+    <p class="mark-row"><span class="mark">18+</span></p>
+    <h2 id="ask-title">这是成人内容</h2>
+    <p class="ask-body">你正要打开 <span id="ask-name"></span>，内容面向成年人。请确认你已满 18 周岁。</p>
+    <div class="ask-actions">
+      <button type="button" id="ask-ok" class="btn">我已满 18 周岁，继续</button>
+      <button type="button" id="ask-no" class="btn btn-quiet">取消</button>
+    </div>
+    <p class="ask-fine">确认结果只存在这台设备的浏览器里，下次不再询问。</p>
+  </div>
+</div>
+
+<script src="sites.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
